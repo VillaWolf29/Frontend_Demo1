@@ -1,0 +1,6 @@
+<h1>Lista de Proyectos</h1>
+<ul>
+    @for(s of project; track $index ){
+        <li>{{s.name}} {{s.location}} {{s.startDate}} {{s.customer.idCustomer}}</li>
+    }  
+</ul>
