@@ -69,12 +69,20 @@ export class CustomerComponent {
     this.dataSource.filter = e.target.value.trim();
   }
 
-  delete(id: number){
+  delete(id: number) {
+  // 1. Preguntar al usuario si está seguro
+  if (confirm("¿Estás seguro de que deseas eliminar este cliente?")) {
+    
+    // 2. Si el usuario hace clic en "Aceptar", se ejecuta el código para eliminar
     this.customerService.delete(id)
-    .pipe(switchMap(()=>this.customerService.findAll()))
-    .subscribe( data => {
-      this.customerService.setCustomerChange(data);
-      this.customerService.setMessageChange('CUSTOMER DELETED!');
-    });
+      .pipe(
+        switchMap(() => this.customerService.findAll())
+      )
+      .subscribe(data => {
+        this.customerService.setCustomerChange(data);
+        this.customerService.setMessageChange('¡CLIENTE ELIMINADO!');
+      });
   }
+  // Si el usuario hace clic en "Cancelar", no sucede nada.
+}
 }
