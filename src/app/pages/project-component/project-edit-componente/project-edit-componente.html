@@ -1,0 +1,67 @@
+<form class="example-container" [formGroup]="form" (ngSubmit)="operate()">
+
+  <!-- ID oculto -->
+  <div [hidden]="true">
+    <mat-form-field>
+      <input matInput placeholder="ID" formControlName="idProject">
+    </mat-form-field>
+  </div>
+
+  <!-- Nombre del proyecto -->
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre del Proyecto</mat-label>
+    <input matInput placeholder="Nombre" formControlName="name">
+  </mat-form-field>
+
+  <!-- Ubicación -->
+  <mat-form-field appearance="outline">
+    <mat-label>Ubicación</mat-label>
+    <input matInput placeholder="Ubicación" formControlName="location">
+  </mat-form-field>
+
+  <!-- Fecha de inicio -->
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha de Inicio</mat-label>
+    <input matInput [matDatepicker]="startPicker" placeholder="Selecciona fecha" formControlName="startDate">
+    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Fecha estimada de fin -->
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha Estimada de Fin</mat-label>
+    <input matInput [matDatepicker]="endPicker" placeholder="Selecciona fecha" formControlName="estimatedEndDate">
+    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Estado -->
+  <mat-form-field appearance="outline">
+    <mat-label>Estado</mat-label>
+    <input matInput placeholder="Estado" formControlName="status">
+  </mat-form-field>
+
+  <!-- Cliente (select) -->
+<mat-form-field appearance="outline">
+  <mat-label>Cliente</mat-label>
+  <mat-select formControlName="customer" [compareWith]="compareCustomers">
+    <mat-option *ngFor="let c of customers" [value]="c">
+      {{ c.firstName }} {{ c.lastName }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+  <!-- Botones -->
+  <div style="margin-top: 20px;">
+    <button mat-raised-button color="primary" type="submit">
+      <mat-icon>done</mat-icon>
+      <span>Guardar</span>
+    </button>
+
+    <button mat-raised-button color="warn" type="button" routerLink="/pages/project">
+      <mat-icon>cancel</mat-icon>
+      <span>Cancelar</span>
+    </button>
+  </div>
+</form>

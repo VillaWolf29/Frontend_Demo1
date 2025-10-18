@@ -4,7 +4,7 @@ export class Project {
   name: string;
   location: string;
   startDate: Date;        
-  estimateEndDate: Date;  
+  estimatedEndDate: Date;  
   status: string;
   customer: Customer;
 }

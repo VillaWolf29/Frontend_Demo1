@@ -37,13 +37,6 @@ export class CustomerComponent {
   //private customerService = inject(CustomerService);
 
   ngOnInit(): void {
-    // this.customerService.findAll().subscribe(data => this.customers = data);
-
-    /*this.customerService.findAll().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });*/
     this.customerService.findAll().subscribe(data => this.createTable(data));
     this.customerService.getCustomerChange().subscribe(data => this.createTable(data));
     this.customerService.getMessageChange().subscribe( data =>
@@ -69,11 +62,8 @@ export class CustomerComponent {
     this.dataSource.filter = e.target.value.trim();
   }
 
-  delete(id: number) {
-  // 1. Preguntar al usuario si está seguro
-  if (confirm("¿Estás seguro de que deseas eliminar este cliente?")) {
-    
-    // 2. Si el usuario hace clic en "Aceptar", se ejecuta el código para eliminar
+  delete(id: number) {  
+  if (confirm("¿Estás seguro de que deseas eliminar este cliente?")) {    
     this.customerService.delete(id)
       .pipe(
         switchMap(() => this.customerService.findAll())
@@ -82,7 +72,6 @@ export class CustomerComponent {
         this.customerService.setCustomerChange(data);
         this.customerService.setMessageChange('¡CLIENTE ELIMINADO!');
       });
-  }
-  // Si el usuario hace clic en "Cancelar", no sucede nada.
+  }  
 }
 }
