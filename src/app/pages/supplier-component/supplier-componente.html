@@ -1,3 +1,5 @@
+<router-outlet/>
+
 <mat-form-field>
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Carlos" #input />
@@ -49,7 +51,7 @@
           <mat-icon>mode_edit</mat-icon>
           Edit
         </button>
-        <button mat-button>
+        <button mat-button (click)= "delete(row.idSupplier)">
           <mat-icon>delete</mat-icon>
           Delete
         </button>
@@ -63,9 +65,9 @@
 
 <mat-paginator
   [pageSizeOptions]="[10, 25, 50, 100]"
-  aria-label="Select page of customers"
+  aria-label="Select page of suppliers"
 ></mat-paginator>
 
-<button mat-fab style="float: right" routerLink="/pages/customer/new">
+<button mat-fab style="float: right" routerLink="/pages/supplier/new">
   <mat-icon>add</mat-icon>
 </button>

@@ -6,4 +6,4 @@ export class Supplier {
     ruc: string;
     address: string;
 }
-  
+

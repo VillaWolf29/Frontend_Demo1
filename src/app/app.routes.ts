@@ -4,6 +4,7 @@ import { SupplierComponent } from './pages/supplier-component/supplier-component
 import { ProjectComponent } from './pages/project-component/project-component';
 import { ProjectEditComponent } from './pages/project-component/project-edit-componente/project-edit-componente';
 import { CustomerEditComponent } from './pages/customer-component/customer-edit-componente/customer-edit-componente';
+import { SupplierEditComponent } from './pages/supplier-component/supplier-edit-componente/supplier-edit-componente';
 
 export const routes: Routes = [
     {
@@ -13,7 +14,12 @@ export const routes: Routes = [
             { path: 'edit/:id', component: CustomerEditComponent }
         ]
     },
-    { path: 'pages/supplier', component: SupplierComponent },
+    { path: 'pages/supplier', component: SupplierComponent,
+        children: [
+            { path: 'new', component: SupplierEditComponent },
+            { path: 'edit/:id', component: SupplierEditComponent }
+        ]
+    },
     {
         path: 'pages/project', component: ProjectComponent,
         children: [

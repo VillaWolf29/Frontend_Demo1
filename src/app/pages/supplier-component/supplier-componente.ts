@@ -7,10 +7,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MaterialModule } from '../../material/material-module';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-supplier',
-  imports: [MaterialModule, RouterLink],
+  imports: [MaterialModule, RouterLink, RouterOutlet],
   templateUrl: './supplier-componente.html',
   styleUrl: './supplier-componente.css',
 })
@@ -35,6 +36,14 @@ export class SupplierComponent {
 
   ngOnInit(): void {
     this.supplierService.findAll().subscribe(data => this.createTable(data));
+    this.supplierService.getSupplierChange().subscribe(data => this.createTable(data));
+    this.supplierService.getMessageChange().subscribe( data =>
+      this._snackBar.open(data, 'INFO', {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      })
+    );
   }
 
   createTable(data: Supplier[]) {
@@ -49,5 +58,18 @@ export class SupplierComponent {
 
   applyFilter(e: any) {
     this.dataSource.filter = e.target.value.trim();
+  }
+
+  delete (id: number) {
+    if (confirm('¿Está seguro de eliminar el proveedor?')) {
+      this.supplierService.delete(id)
+      .pipe(
+        switchMap(() => this.supplierService.findAll())
+      )
+      .subscribe((data) => {
+        this.supplierService.setSupplierChange(data);
+        this.supplierService.setMessageChange('SUPPLIER DELETED!');
+      });
+    }
   }
 }
