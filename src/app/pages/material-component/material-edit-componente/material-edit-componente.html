@@ -10,19 +10,19 @@
   <!-- Nombre del material -->
   <mat-form-field appearance="outline">
     <mat-label>Nombre del Material</mat-label>
-    <input matInput placeholder="Ej. Tela de algodón" formControlName="name">
+    <input matInput placeholder="Ej. Tela de algodón" formControlName="name" required>
   </mat-form-field>
 
   <!-- Unidad de medida -->
   <mat-form-field appearance="outline">
     <mat-label>Unidad de Medida</mat-label>
-    <input matInput placeholder="Ej. metros, kilos, unidades" formControlName="measurementUnit">
+    <input matInput placeholder="Ej. metros, kilos, unidades" formControlName="measurementUnit" required> 
   </mat-form-field>
 
   <!-- Precio unitario -->
   <mat-form-field appearance="outline">
     <mat-label>Precio Unitario (S/)</mat-label>
-    <input matInput type="number" min="0" step="0.01" formControlName="unitPrice" placeholder="Ej. 15.50">
+    <input matInput type="number" min="0" step="0.01" formControlName="unitPrice" placeholder="Ej. 15.50" required="">
     <mat-error *ngIf="form.get('unitPrice')?.hasError('required')">
       El precio es obligatorio
     </mat-error>
@@ -34,7 +34,7 @@
   <!-- Stock actual -->
   <mat-form-field appearance="outline">
     <mat-label>Stock Actual</mat-label>
-    <input matInput type="number" min="0" formControlName="actualStock" placeholder="Ej. 50">
+    <input matInput type="number" min="0" formControlName="actualStock" placeholder="Ej. 50" required>
     <mat-error *ngIf="form.get('actualStock')?.hasError('required')">
       El stock es obligatorio
     </mat-error>
