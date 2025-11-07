@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SupplierService } from '../../../services/supplier-service';
 import { Supplier } from '../../../model/supplier';
 import { switchMap } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-supplier-edit',
@@ -20,7 +21,8 @@ export class SupplierEditComponent {
     constructor(
     private route: ActivatedRoute, // Tomar y conocer algo de la url activa
     private supplierService: SupplierService,
-    private router: Router // Sirve para navegar a otra ruta
+    private router: Router, // Sirve para navegar a otra ruta
+    private _dialog: MatDialog
   ) {}
 
     ngOnInit(): void {

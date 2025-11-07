@@ -2,38 +2,43 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Customer } from '../model/customer';
+import { GenericService } from './generic-service';
 import { Subject } from 'rxjs';
+import { inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class CustomerService {
-  private url: string = `${environment.HOST}/customers`;
+export class CustomerService extends GenericService<Customer> {
+  //private url: string = `${environment.HOST}/customers`;
   private customerChange: Subject<Customer[]> = new Subject<Customer[]>;
   private messageChange: Subject<string> = new Subject<string>;
 
-  constructor(private http: HttpClient){}
-  
-  findAll(){
-    return this.http.get<Customer[]>(this.url);
+  //constructor(private http: HttpClient){}
+  constructor(){
+    super(inject(HttpClient), `${environment.HOST}/customers`);
   }
 
-  findById(id: number){
-    return this.http.get<Customer>(`${this.url}/${id}`);
-  }
+//  findAll(){
+ //   return this.http.get<Customer[]>(this.url);
+ // }
 
-  save(customer: Customer){
-    return this.http.post(this.url, customer);
-  }
+ // findById(id: number){
+ //   return this.http.get<Customer>(`${this.url}/${id}`);
+ // }
 
-  update(id: number, customer: Customer){
-    return this.http.put(`${this.url}/${id}`, customer);
-  }
+ // save(customer: Customer){
+ //   return this.http.post(this.url, customer);
+ // }
 
-  delete(id: number){
-    return this.http.delete(`${this.url}/${id}`);
-  }
+  //update(id: number, customer: Customer){
+  //  return this.http.put(`${this.url}/${id}`, customer);
+ // }
+
+ // delete(id: number){
+ //   return this.http.delete(`${this.url}/${id}`);
+//  }
 
   //////////////////////////
   setCustomerChange(data: Customer[]){
